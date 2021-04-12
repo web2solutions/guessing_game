@@ -16,7 +16,10 @@ fn main() {
             .expect("Failed  to read line");
 
         // shadow
-        let guess: u32 = guess.trim().parse().expect("Please type a number!");
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
 
         println!("You guessed: {}", guess);
 
@@ -26,7 +29,7 @@ fn main() {
             Ordering::Equal => {
                 println!("You win!");
                 break;
-            }
+            },
         }
     }
 }
